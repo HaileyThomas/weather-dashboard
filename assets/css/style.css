@@ -1,0 +1,13 @@
+h1 {
+    color: #FFFFFF;
+    font-size: 60px;
+    text-shadow: 3px -3px #ef3550,
+                6px -6px #f48fb1,
+                9px -9px #7e57c2,
+                12px -12px #2196f3,
+                15px -15px #26c6da,
+                18px -18px #43a047,
+                21px -21px #eeff41,
+                24px -24px #f9a825,
+                27px -27px #ff5722;
+}
