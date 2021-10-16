@@ -3,6 +3,7 @@ var formEl = document.querySelector("#form");
 var inputEl = document.querySelector("#enter-city");
 var historyEl = document.querySelector("#history-container");
 var resultsEl = document.querySelector("#right-container");
+var listHistory = JSON.parse(window.localStorage.getItem("history")) || [];
 var city;
 var latitude;
 var longitude;
@@ -44,12 +45,38 @@ var getCityLocation = function () {
                     console.log("state: " + state);
                     country = data[i].country;
                     console.log("country: " + country);
+                    // run save city function
+                    saveCity();
+                    // run get weather function
+                    getWeather();
                 };
             });
         } else {
             alert("Error!");
         };
     });
+};
+
+// GET WEATHER FUNCTION
+var getWeather = function () {
+    console.log("Hi2");
+};
+
+// SAVE CITY FUNCTION
+var saveCity = function () {
+    // push city to array
+    listHistory.push(city);
+    // allow 10 history listings
+    listHistory.splice(10);
+    // save city to local storage
+    localStorage.setItem("history", JSON.stringify(listHistory));
+    // run display history function
+    displayHistory();
+};
+
+// DISPLAY HISTORY FUNCTION
+var displayHistory = function () {
+    console.log("meow");
 };
 
 
