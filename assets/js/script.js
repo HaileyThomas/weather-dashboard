@@ -2,6 +2,7 @@
 var formEl = document.querySelector("#form");
 var inputEl = document.querySelector("#enter-city");
 var historyEl = document.querySelector("#history-container");
+var historyListEl = document.querySelector("#history-list");
 var resultsEl = document.querySelector("#right-container");
 var listHistory = JSON.parse(window.localStorage.getItem("history")) || [];
 var city;
@@ -70,15 +71,37 @@ var saveCity = function () {
     listHistory.splice(10);
     // save city to local storage
     localStorage.setItem("history", JSON.stringify(listHistory));
-    // run display history function
+    updateHistory();
+};
+
+// UPDATE HISTORY FUNCTION
+var updateHistory = function () {
+    // get list
+    var getList = document.getElementsByClassName("list-group-item");
+    for (var i = 0; i < getList.length; i++) {
+        getList[i].parentNode.removeChild(getList[i]);
+    };
     displayHistory();
 };
 
 // DISPLAY HISTORY FUNCTION
 var displayHistory = function () {
-    console.log("meow");
+    for (i = 0; i < listHistory.length; i++) {
+        console.log("item: " + listHistory[i]);
+        // create list element
+        var li = document.createElement("li");
+        li.className = "list-group-item";
+        historyListEl.appendChild(li);
+        // create button element
+        var button = document.createElement("button");
+        button.className = "btn btn-primary m-2";
+        button.innerHTML = listHistory[i];
+        li.appendChild(button);
+    };
 };
 
+// run display history function
+displayHistory();
 
 // EVENT LISTENERS
 formEl.addEventListener("submit", formSubmitHandler);
