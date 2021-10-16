@@ -60,7 +60,17 @@ var getCityLocation = function () {
 
 // GET WEATHER FUNCTION
 var getWeather = function () {
-    console.log("Hi2");
+    // get weather api url
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=" + "hourly,daily" + "&appid=" + "d50140606331b5f0875df8b66c236b78";
+    // fetch weather api
+    fetch(weatherApiUrl).then(function (response) {
+        // request was successful
+        if (response.ok) {
+            console.log(response);
+        } else {
+            alert("Error!");
+        };
+    });
 };
 
 // SAVE CITY FUNCTION
