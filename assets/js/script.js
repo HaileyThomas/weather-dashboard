@@ -4,6 +4,10 @@ var inputEl = document.querySelector("#enter-city");
 var historyEl = document.querySelector("#history-container");
 var resultsEl = document.querySelector("#right-container");
 var city;
+var latitude;
+var longitude;
+var state;
+var country;
 
 // FORM FUNCTION
 var formSubmitHandler = function (event) {
@@ -28,12 +32,25 @@ var getCityLocation = function () {
             // get data from response
             response.json().then(function (data) {
                 console.log(data);
+                // loop over fetch response
+                for (var i = 0; i < data.length; i++) {
+                    // create variables
+                    latitude = data[i].lat;
+                    console.log("latitude: " + latitude);
+                    longitude = data[i].lon;
+                    console.log("longitude: " + longitude);
+                    console.log("city: " + city);
+                    state = data[i].state;
+                    console.log("state: " + state);
+                    country = data[i].country;
+                    console.log("country: " + country);
+                };
             });
         } else {
             alert("Error!");
-        }
-    })
-}
+        };
+    });
+};
 
 
 // EVENT LISTENERS
