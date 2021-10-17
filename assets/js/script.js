@@ -10,6 +10,11 @@ var latitude;
 var longitude;
 var state;
 var country;
+var currentTime;
+var currentTemp;
+var currentHumidity;
+var currentWind;
+var currentUv;
 
 // FORM FUNCTION
 var formSubmitHandler = function (event) {
@@ -30,10 +35,8 @@ var getCityLocation = function () {
     fetch(cityApiUrl).then(function (response) {
         //request was successful
         if (response.ok) {
-            console.log(response);
             // get data from response
             response.json().then(function (data) {
-                console.log(data);
                 // loop over fetch response
                 for (var i = 0; i < data.length; i++) {
                     // create variables
@@ -42,10 +45,6 @@ var getCityLocation = function () {
                     longitude = data[i].lon;
                     console.log("longitude: " + longitude);
                     console.log("city: " + city);
-                    state = data[i].state;
-                    console.log("state: " + state);
-                    country = data[i].country;
-                    console.log("country: " + country);
                     // run save city function
                     saveCity();
                     // run get weather function
@@ -61,12 +60,26 @@ var getCityLocation = function () {
 // GET WEATHER FUNCTION
 var getWeather = function () {
     // get weather api url
-    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=" + "hourly,daily" + "&appid=" + "d50140606331b5f0875df8b66c236b78";
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=" + "hourly,minutely" + "&appid=" + "d50140606331b5f0875df8b66c236b78";
     // fetch weather api
     fetch(weatherApiUrl).then(function (response) {
         // request was successful
         if (response.ok) {
-            console.log(response);
+            console.log("function is running");
+            // get data from response
+            response.json().then(function (data) {
+                console.log(data);
+                // loop over fetch response
+                for (var i = 0; i < data.length; i++) {
+                    // create variables
+                    var timeZone = data[i].timezone;
+                    console.log(timeZone);
+                    currentTime = data[i].current.dt;
+                    console.log("current time: " + currentTime);
+                    currentTemp = data[i].current.temp;
+                    console.log("current temp: " + currentTemp);
+                };
+            });
         } else {
             alert("Error!");
         };
