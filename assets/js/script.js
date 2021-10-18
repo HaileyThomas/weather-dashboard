@@ -69,10 +69,11 @@ var getWeather = function () {
             // get data from response
             response.json().then(function (data) {
                 console.log(data);
+                console.log(data.main.temp);
                 // loop over fetch response
                 for (var i = 0; i < data.length; i++) {
                     // create variables
-                    var timeZone = data[i].timezone;
+                    var timeZone = data[i].current.timezone;
                     console.log(timeZone);
                     currentTime = data[i].current.dt;
                     console.log("current time: " + currentTime);
