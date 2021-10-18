@@ -22,7 +22,6 @@ var formSubmitHandler = function (event) {
     event.preventDefault();
     // get value from input element
     city = inputEl.value.trim();
-    console.log(city);
     // run get city location function
     getCityLocation();
 };
@@ -60,31 +59,20 @@ var getCityLocation = function () {
 // GET WEATHER FUNCTION
 var getWeather = function () {
     // get weather api url
-    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=" + "hourly,minutely" + "&appid=" + "d50140606331b5f0875df8b66c236b78";
+    var weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&exclude=" + "hourly,minutely" + "&units=" + "imperial" + "&appid=" + "d50140606331b5f0875df8b66c236b78";
     // fetch weather api
-    fetch(weatherApiUrl).then(function (response) {
-        // request was successful
-        if (response.ok) {
-            console.log("function is running");
-            // get data from response
-            response.json().then(function (data) {
-                console.log(data);
-                console.log(data.main.temp);
-                // loop over fetch response
-                for (var i = 0; i < data.length; i++) {
-                    // create variables
-                    var timeZone = data[i].current.timezone;
-                    console.log(timeZone);
-                    currentTime = data[i].current.dt;
-                    console.log("current time: " + currentTime);
-                    currentTemp = data[i].current.temp;
-                    console.log("current temp: " + currentTemp);
-                };
-            });
-        } else {
-            alert("Error!");
-        };
-    });
+    fetch(weatherApiUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            console.log(data.current);
+            console.log(data.current.temp);
+            console.log(data.current.dt);
+            currentTemp = data.current.temp;
+            console.log("current temp: " + currentTemp);
+        });
 };
 
 // SAVE CITY FUNCTION
