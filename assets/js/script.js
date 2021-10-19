@@ -74,8 +74,8 @@ var getWeather = function () {
             console.log(data.current.temp);
             console.log(data.current.dt);
             // set current variables
-            var getTime = data.current.dt;
-            currentTime = moment(getTime).format("MM-DD-YYYY");
+            var getTime = data.current.dt * 1000;
+            currentTime = moment(getTime).format("MM/DD/YYYY");
             console.log("current time: " + currentTime);
             currentTemp = data.current.temp;
             console.log("current temp: " + currentTemp);
@@ -102,7 +102,7 @@ var displayCurrent = function () {
     // create results header and div
     var currentHeader = document.createElement("h2");
     currentHeader.className = "card-header bg-primary text-white";
-    currentHeader.innerHTML = city;
+    currentHeader.innerHTML = city + "  (" + currentTime + ")";
     currentContainer.appendChild(currentHeader);
     var currentResultsDiv = document.createElement("div");
     currentResultsDiv.className = "card-body d-flex";
