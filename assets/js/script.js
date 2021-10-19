@@ -113,8 +113,16 @@ var displayCurrent = function () {
     currentResultsDiv.appendChild(showCurrentResultsDiv);
     var showCurrentResults = document.createElement("p");
     showCurrentResults.className = "fs-4";
-    showCurrentResults.innerHTML = "<b>Current Temperature:</b> " + currentTemp + " °F <br/> <b>Current Humidity:</b> " + currentHumidity + " % <br /> <b>Current Wind Speed:</b> " + currentWind + " MPH <br /> <b>UV Index:</b> " + currentUvi;
+    showCurrentResults.innerHTML = "<b>Current Temperature:</b> " + currentTemp + " °F <br/> <b>Current Humidity:</b> " + currentHumidity + " % <br /> <b>Current Wind Speed:</b> " + currentWind + " MPH <br /> <b>UV Index:</b> " + "<span id='uvi'>" + currentUvi + "</span>";
     showCurrentResultsDiv.appendChild(showCurrentResults);
+    var showCurrentUvi = document.getElementById("uvi");
+    if (currentUvi <= 2) {
+        showCurrentUvi.className = "bg-success rounded text-white";
+    } else if (6 > currentUvi > 2) {
+        showCurrentUvi.className = "bg-warning rounded text-white";
+    } else if (currentUvi > 6) {
+        showCurrentUvi.className = "bg-danger rounded text-white";
+    };
     var showCurrentIconDiv = document.createElement("div");
     showCurrentIconDiv.className = "col-4";
     currentResultsDiv.appendChild(showCurrentIconDiv);
