@@ -74,7 +74,8 @@ var getWeather = function () {
             console.log(data.current.temp);
             console.log(data.current.dt);
             // set current variables
-            currentTime = data.current.dt;
+            var getTime = data.current.dt;
+            currentTime = moment(getTime).format("MM-DD-YYYY");
             console.log("current time: " + currentTime);
             currentTemp = data.current.temp;
             console.log("current temp: " + currentTemp);
@@ -84,7 +85,7 @@ var getWeather = function () {
             console.log("current wind speed: " + currentWind);
             currentUvi = data.current.uvi;
             console.log("current uvi: " + currentUvi);
-            currentIcon = data.current.weather.icon;
+            currentIcon = data.current.weather[0].icon;
             console.log("current icon: " + currentIcon);
             // run display current weather function
             displayCurrent();
@@ -101,16 +102,25 @@ var displayCurrent = function () {
     // create results header and div
     var currentHeader = document.createElement("h2");
     currentHeader.className = "card-header bg-primary text-white";
-    currentHeader.textContent = city;
+    currentHeader.innerHTML = city;
     currentContainer.appendChild(currentHeader);
-    var currentResults = document.createElement("div");
-    currentResults.className = "card-body d-flex flex-column";
-    currentContainer.appendChild(currentResults);
+    var currentResultsDiv = document.createElement("div");
+    currentResultsDiv.className = "card-body d-flex";
+    currentContainer.appendChild(currentResultsDiv);
     // show current results
+    var showCurrentResultsDiv = document.createElement("div");
+    showCurrentResultsDiv.className = "col-8";
+    currentResultsDiv.appendChild(showCurrentResultsDiv);
     var showCurrentResults = document.createElement("p");
     showCurrentResults.className = "fs-4";
     showCurrentResults.innerHTML = "<b>Current Temperature:</b> " + currentTemp + " °F <br/> <b>Current Humidity:</b> " + currentHumidity + " % <br /> <b>Current Wind Speed:</b> " + currentWind + " MPH <br /> <b>UV Index:</b> " + currentUvi;
-    currentResults.appendChild(showCurrentResults);
+    showCurrentResultsDiv.appendChild(showCurrentResults);
+    var showCurrentIconDiv = document.createElement("div");
+    showCurrentIconDiv.className = "col-4";
+    currentResultsDiv.appendChild(showCurrentIconDiv);
+    var showCurrentIcon = document.createElement("img");
+    showCurrentIcon.src = "./assets/images/icons/" + currentIcon + ".png";
+    showCurrentIconDiv.appendChild(showCurrentIcon);
 };
 
 // SAVE CITY FUNCTION
@@ -139,7 +149,7 @@ var displayHistory = function () {
     for (i = 0; i < listHistory.length; i++) {
         // create list element
         var li = document.createElement("li");
-        li.className = "list-group-item";
+        li.className = "list-group-item d-flex flex-column";
         historyListEl.appendChild(li);
         // create button element
         var button = document.createElement("button");
