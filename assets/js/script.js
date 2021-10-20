@@ -16,6 +16,31 @@ var currentHumidity;
 var currentWind;
 var currentUvi;
 var currentIcon;
+var dailyOneTime;
+var dailyOneTemp;
+var dailyOneWind;
+var dailyOneHumidity;
+var dailyOneIcon;
+var dailyTwoTime;
+var dailyTwoTemp;
+var dailyTwoWind;
+var dailyTwoHumidity;
+var dailyTwoIcon;
+var dailyThreeTime;
+var dailyThreeTemp;
+var dailyThreeWind;
+var dailyThreeHumidity;
+var dailyThreeIcon;
+var dailyFourTime;
+var dailyFourTemp;
+var dailyFourWind;
+var dailyFourHumidity;
+var dailyFourIcon;
+var dailyFiveTime;
+var dailyFiveTemp;
+var dailyFiveWind;
+var dailyFiveHumidity;
+var dailyFiveIcon;
 
 // FORM FUNCTION
 var formSubmitHandler = function (event) {
@@ -70,9 +95,7 @@ var getWeather = function () {
         .then(function (data) {
             // testing logs
             console.log(data);
-            console.log(data.current);
-            console.log(data.current.temp);
-            console.log(data.current.dt);
+
             // set current variables
             var getTime = data.current.dt * 1000;
             currentTime = moment(getTime).format("MM/DD/YYYY");
@@ -87,6 +110,66 @@ var getWeather = function () {
             console.log("current uvi: " + currentUvi);
             currentIcon = data.current.weather[0].icon;
             console.log("current icon: " + currentIcon);
+            // set daily 1 variables
+            var getOneTime = data.daily[1].dt * 1000;
+            dailyOneTime = moment(getOneTime).format("MM/DD/YYYY");
+            console.log("daily1 time: " + dailyOneTime);
+            dailyOneTemp = data.daily[1].temp.day;
+            console.log("daily1 day temp: " + dailyOneTemp);
+            dailyOneWind = data.daily[1].wind_speed;
+            console.log("daily1 wind: " + dailyOneWind);
+            dailyOneHumidity = data.daily[1].humidity;
+            console.log("daily1 humidity: " + dailyOneHumidity);
+            dailyOneIcon = data.daily[1].weather[0].icon;
+            console.log("daily1 icon: " + dailyOneIcon);
+            // set daily 2 variables
+            var getTwoTime = data.daily[2].dt * 1000;
+            dailyTwoTime = moment(getTwoTime).format("MM/DD/YYYY");
+            console.log("daily2 time: " + dailyTwoTime);
+            dailyTwoTemp = data.daily[2].temp.day;
+            console.log("daily2 temp: " + dailyTwoTemp);
+            dailyTwoWind = data.daily[2].wind_speed;
+            console.log("daily2 wind: " + dailyTwoWind);
+            dailyTwoHumidity = data.daily[2].humidity;
+            console.log("daily2 humidity: " + dailyTwoHumidity);
+            dailyTwoIcon = data.daily[2].weather[0].icon;
+            console.log("daily2 icon: " + dailyTwoIcon);
+            // set daily 3 variables
+            var getThreeTime = data.daily[3].dt * 1000;
+            dailyThreeTime = moment(getThreeTime).format("MM/DD/YYYY");
+            console.log("daily3 time: " + dailyThreeTime);
+            dailyThreeTemp = data.daily[3].temp.day;
+            console.log("daily3 temp: " + dailyThreeTemp);
+            dailyThreeWind = data.daily[3].wind_speed;
+            console.log("daily3 wind: " + dailyThreeWind);
+            dailyThreeHumidity = data.daily[3].humidity;
+            console.log("daily3 humidity: " + dailyThreeHumidity);
+            dailyThreeIcon = data.daily[3].weather[0].icon;
+            console.log("daily3 icon: " + dailyThreeIcon);
+            // set daily 4 variables
+            var getFourTime = data.daily[4].dt * 1000;
+            dailyFourTime = moment(getFourTime).format("MM/DD/YYYY");
+            console.log("daily4 time: " + dailyFourTime);
+            dailyFourTemp = data.daily[4].temp.day;
+            console.log("daily4 temp: " + dailyFourTemp);
+            dailyFourWind = data.daily[4].wind_speed;
+            console.log("daily4 wind: " + dailyFourWind);
+            dailyFourHumidity = data.daily[4].humidity;
+            console.log("daily4 humidity: " + dailyFourHumidity);
+            dailyFourIcon = data.daily[4].weather[0].icon;
+            console.log("daily4 icon: " + dailyFourIcon);
+            // set daily 5 variables
+            var getFiveTime = data.daily[5].dt * 1000;
+            dailyFiveTime = moment(getFiveTime).format("MM/DD/YYYY");
+            console.log("daily5 time: " + dailyFiveTime);
+            dailyFiveTemp = data.daily[5].temp.day;
+            console.log("daily5 temp: " + dailyFiveTemp);
+            dailyFiveWind = data.daily[5].wind_speed;
+            console.log("daily5 wind: " + dailyFiveWind);
+            dailyFiveHumidity = data.daily[5].humidity;
+            console.log("daily5 humidity: " + dailyFiveHumidity);
+            dailyFiveIcon = data.daily[5].weather[0].icon;
+            console.log("daily5 icon: " + dailyFiveIcon);
             // run display current weather function
             displayCurrent();
         });
