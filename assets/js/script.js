@@ -212,6 +212,95 @@ var displayCurrent = function () {
     var showCurrentIcon = document.createElement("img");
     showCurrentIcon.src = "./assets/images/icons/" + currentIcon + ".png";
     showCurrentIconDiv.appendChild(showCurrentIcon);
+    // add div row for future forecast
+    var futureRowDiv = document.createElement("div");
+    futureRowDiv.className = "row"
+    resultsEl.appendChild(futureRowDiv);
+    // create future forecast day one
+    var futureOneCard = document.createElement("div");
+    futureOneCard.className = "col card d-flex p-0 m-1";
+    futureRowDiv.appendChild(futureOneCard);
+    var futureOneHeader = document.createElement("h5");
+    futureOneHeader.className = "card-header bg-primary text-white";
+    futureOneHeader.innerHTML = dailyOneTime;
+    futureOneCard.appendChild(futureOneHeader);
+    var futureOneBottom = document.createElement("div");
+    futureOneBottom.className = "card-body align-self-center";
+    futureOneCard.appendChild(futureOneBottom);
+    var futureOneIcon = document.createElement("img");
+    futureOneIcon.src = "./assets/images/icons/" + dailyOneIcon + ".png";
+    futureOneBottom.appendChild(futureOneIcon);
+    var futureOneResults = document.createElement("p");
+    futureOneResults.innerHTML = "<b>Temp:</b> " + dailyOneTemp + " °F <br/><b>Humidity:</b> " + dailyOneHumidity + " %<br/><b>Wind:</b> " + dailyOneWind + " MPH";
+    futureOneBottom.appendChild(futureOneResults);
+    // create future forecast day two
+    var futureTwoCard = document.createElement("div");
+    futureTwoCard.className = "col card d-flex p-0 m-1";
+    futureRowDiv.appendChild(futureTwoCard);
+    var futureTwoHeader = document.createElement("h5");
+    futureTwoHeader.className = "card-header bg-primary text-white";
+    futureTwoHeader.innerHTML = dailyTwoTime;
+    futureTwoCard.appendChild(futureTwoHeader);
+    var futureTwoBottom = document.createElement("div");
+    futureTwoBottom.className = "card-body align-self-center";
+    futureTwoCard.appendChild(futureTwoBottom);
+    var futureTwoIcon = document.createElement("img");
+    futureTwoIcon.src = "./assets/images/icons/" + dailyTwoIcon + ".png";
+    futureTwoBottom.appendChild(futureTwoIcon);
+    var futureTwoResults = document.createElement("p");
+    futureTwoResults.innerHTML = "<b>Temp:</b> " + dailyTwoTemp + " °F <br/><b>Humidity:</b> " + dailyTwoHumidity + " %<br/><b>Wind:</b> " + dailyTwoWind + " MPH";
+    futureTwoBottom.appendChild(futureTwoResults);
+    // create future forecast day three
+    var futureThreeCard = document.createElement("div");
+    futureThreeCard.className = "col card d-flex p-0 m-1";
+    futureRowDiv.appendChild(futureThreeCard);
+    var futureThreeHeader = document.createElement("h5");
+    futureThreeHeader.className = "card-header bg-primary text-white";
+    futureThreeHeader.innerHTML = dailyThreeTime;
+    futureThreeCard.appendChild(futureThreeHeader);
+    var futureThreeBottom = document.createElement("div");
+    futureThreeBottom.className = "card-body align-self-center";
+    futureThreeCard.appendChild(futureThreeBottom);
+    var futureThreeIcon = document.createElement("img");
+    futureThreeIcon.src = "./assets/images/icons/" + dailyThreeIcon + ".png";
+    futureThreeBottom.appendChild(futureThreeIcon);
+    var futureThreeResults = document.createElement("p");
+    futureThreeResults.innerHTML = "<b>Temp:</b> " + dailyThreeTemp + " °F <br/><b>Humidity:</b> " + dailyThreeHumidity + " %<br/><b>Wind:</b> " + dailyThreeWind + " MPH";
+    futureThreeBottom.appendChild(futureThreeResults);
+    // create future forecast day four
+    var futureFourCard = document.createElement("div");
+    futureFourCard.className = "col card d-flex p-0 m-1";
+    futureRowDiv.appendChild(futureFourCard);
+    var futureFourHeader = document.createElement("h5");
+    futureFourHeader.className = "card-header bg-primary text-white";
+    futureFourHeader.innerHTML = dailyFourTime;
+    futureFourCard.appendChild(futureFourHeader);
+    var futureFourBottom = document.createElement("div");
+    futureFourBottom.className = "card-body align-self-center";
+    futureFourCard.appendChild(futureFourBottom);
+    var futureFourIcon = document.createElement("img");
+    futureFourIcon.src = "./assets/images/icons/" + dailyFourIcon + ".png";
+    futureFourBottom.appendChild(futureFourIcon);
+    var futureFourResults = document.createElement("p");
+    futureFourResults.innerHTML = "<b>Temp:</b> " + dailyFourTemp + " °F <br/><b>Humidity:</b> " + dailyFourHumidity + " %<br/><b>Wind:</b> " + dailyFourWind + " MPH";
+    futureFourBottom.appendChild(futureFourResults);
+    // create future forecast day five
+    var futureFiveCard = document.createElement("div");
+    futureFiveCard.className = "col card d-flex p-0 m-1";
+    futureRowDiv.appendChild(futureFiveCard);
+    var futureFiveHeader = document.createElement("h5");
+    futureFiveHeader.className = "card-header bg-primary text-white";
+    futureFiveHeader.innerHTML = dailyFiveTime;
+    futureFiveCard.appendChild(futureFiveHeader);
+    var futureFiveBottom = document.createElement("div");
+    futureFiveBottom.className = "card-body align-self-center";
+    futureFiveCard.appendChild(futureFiveBottom);
+    var futureFiveIcon = document.createElement("img");
+    futureFiveIcon.src = "./assets/images/icons/" + dailyFiveIcon + ".png";
+    futureFiveBottom.appendChild(futureFiveIcon);
+    var futureFiveResults = document.createElement("p");
+    futureFiveResults.innerHTML = "<b>Temp:</b> " + dailyFiveTemp + " °F <br/><b>Humidity:</b> " + dailyFiveHumidity + " %<br/><b>Wind:</b> " + dailyFiveWind + " MPH";
+    futureFiveBottom.appendChild(futureFiveResults);
 };
 
 // SAVE CITY FUNCTION
