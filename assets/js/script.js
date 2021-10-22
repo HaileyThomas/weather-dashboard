@@ -4,6 +4,8 @@ var inputEl = document.querySelector("#enter-city");
 var historyEl = document.querySelector("#history-container");
 var historyListEl = document.querySelector("#history-list");
 var resultsEl = document.querySelector("#right-container");
+var currentContainer;
+var futureRowDiv;
 var listHistory = JSON.parse(window.localStorage.getItem("history")) || [];
 var city;
 var latitude;
@@ -54,6 +56,7 @@ var formSubmitHandler = function (event) {
 
 // GET CITY LOCATION FUNCTION
 var getCityLocation = function () {
+    console.log("its working");
     // format api url
     var cityApiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + "6ff484b66ed5b4a802761c069566a64c";
     // make fetch request
@@ -66,10 +69,7 @@ var getCityLocation = function () {
                 for (var i = 0; i < data.length; i++) {
                     // create variables
                     latitude = data[i].lat;
-                    console.log("latitude: " + latitude);
                     longitude = data[i].lon;
-                    console.log("longitude: " + longitude);
-                    console.log("city: " + city);
                     // run save city function
                     saveCity();
                     // run get weather function
@@ -93,83 +93,49 @@ var getWeather = function () {
             return response.json();
         })
         .then(function (data) {
-            // testing logs
-            console.log(data);
-
             // set current variables
             var getTime = data.current.dt * 1000;
             currentTime = moment(getTime).format("MM/DD/YYYY");
-            console.log("current time: " + currentTime);
             currentTemp = data.current.temp;
-            console.log("current temp: " + currentTemp);
             currentHumidity = data.current.humidity;
-            console.log("current humidity: " + currentHumidity);
             currentWind = data.current.wind_speed;
-            console.log("current wind speed: " + currentWind);
             currentUvi = data.current.uvi;
-            console.log("current uvi: " + currentUvi);
             currentIcon = data.current.weather[0].icon;
-            console.log("current icon: " + currentIcon);
             // set daily 1 variables
             var getOneTime = data.daily[1].dt * 1000;
             dailyOneTime = moment(getOneTime).format("MM/DD/YYYY");
-            console.log("daily1 time: " + dailyOneTime);
             dailyOneTemp = data.daily[1].temp.day;
-            console.log("daily1 day temp: " + dailyOneTemp);
             dailyOneWind = data.daily[1].wind_speed;
-            console.log("daily1 wind: " + dailyOneWind);
             dailyOneHumidity = data.daily[1].humidity;
-            console.log("daily1 humidity: " + dailyOneHumidity);
             dailyOneIcon = data.daily[1].weather[0].icon;
-            console.log("daily1 icon: " + dailyOneIcon);
             // set daily 2 variables
             var getTwoTime = data.daily[2].dt * 1000;
             dailyTwoTime = moment(getTwoTime).format("MM/DD/YYYY");
-            console.log("daily2 time: " + dailyTwoTime);
             dailyTwoTemp = data.daily[2].temp.day;
-            console.log("daily2 temp: " + dailyTwoTemp);
             dailyTwoWind = data.daily[2].wind_speed;
-            console.log("daily2 wind: " + dailyTwoWind);
             dailyTwoHumidity = data.daily[2].humidity;
-            console.log("daily2 humidity: " + dailyTwoHumidity);
             dailyTwoIcon = data.daily[2].weather[0].icon;
-            console.log("daily2 icon: " + dailyTwoIcon);
             // set daily 3 variables
             var getThreeTime = data.daily[3].dt * 1000;
             dailyThreeTime = moment(getThreeTime).format("MM/DD/YYYY");
-            console.log("daily3 time: " + dailyThreeTime);
             dailyThreeTemp = data.daily[3].temp.day;
-            console.log("daily3 temp: " + dailyThreeTemp);
             dailyThreeWind = data.daily[3].wind_speed;
-            console.log("daily3 wind: " + dailyThreeWind);
             dailyThreeHumidity = data.daily[3].humidity;
-            console.log("daily3 humidity: " + dailyThreeHumidity);
             dailyThreeIcon = data.daily[3].weather[0].icon;
-            console.log("daily3 icon: " + dailyThreeIcon);
             // set daily 4 variables
             var getFourTime = data.daily[4].dt * 1000;
             dailyFourTime = moment(getFourTime).format("MM/DD/YYYY");
-            console.log("daily4 time: " + dailyFourTime);
             dailyFourTemp = data.daily[4].temp.day;
-            console.log("daily4 temp: " + dailyFourTemp);
             dailyFourWind = data.daily[4].wind_speed;
-            console.log("daily4 wind: " + dailyFourWind);
             dailyFourHumidity = data.daily[4].humidity;
-            console.log("daily4 humidity: " + dailyFourHumidity);
             dailyFourIcon = data.daily[4].weather[0].icon;
-            console.log("daily4 icon: " + dailyFourIcon);
             // set daily 5 variables
             var getFiveTime = data.daily[5].dt * 1000;
             dailyFiveTime = moment(getFiveTime).format("MM/DD/YYYY");
-            console.log("daily5 time: " + dailyFiveTime);
             dailyFiveTemp = data.daily[5].temp.day;
-            console.log("daily5 temp: " + dailyFiveTemp);
             dailyFiveWind = data.daily[5].wind_speed;
-            console.log("daily5 wind: " + dailyFiveWind);
             dailyFiveHumidity = data.daily[5].humidity;
-            console.log("daily5 humidity: " + dailyFiveHumidity);
             dailyFiveIcon = data.daily[5].weather[0].icon;
-            console.log("daily5 icon: " + dailyFiveIcon);
             // run display current weather function
             displayCurrent();
         });
@@ -179,7 +145,7 @@ var getWeather = function () {
 var displayCurrent = function () {
     console.log("function working");
     // create container
-    var currentContainer = document.createElement("div");
+    currentContainer = document.createElement("div");
     currentContainer.className = "card m-3";
     resultsEl.appendChild(currentContainer);
     // create results header and div
@@ -187,7 +153,7 @@ var displayCurrent = function () {
     currentHeader.className = "card-header bg-primary text-white";
     currentHeader.innerHTML = city + "  (" + currentTime + ")";
     currentContainer.appendChild(currentHeader);
-    var currentResultsDiv = document.createElement("div");
+    currentResultsDiv = document.createElement("div");
     currentResultsDiv.className = "card-body d-flex";
     currentContainer.appendChild(currentResultsDiv);
     // show current results
@@ -198,14 +164,14 @@ var displayCurrent = function () {
     showCurrentResults.className = "fs-4";
     showCurrentResults.innerHTML = "<b>Current Temperature:</b> " + currentTemp + " °F <br/> <b>Current Humidity:</b> " + currentHumidity + " % <br /> <b>Current Wind Speed:</b> " + currentWind + " MPH <br /> <b>UV Index:</b> " + "<span id='uvi'>" + currentUvi + "</span>";
     showCurrentResultsDiv.appendChild(showCurrentResults);
-    var showCurrentUvi = document.getElementById("uvi");
+    /* var showCurrentUvi = document.getElementById("uvi");
     if (currentUvi <= 2) {
         showCurrentUvi.className = "bg-success rounded text-white";
     } else if (6 > currentUvi > 2) {
         showCurrentUvi.className = "bg-warning rounded text-white";
     } else if (currentUvi > 6) {
         showCurrentUvi.className = "bg-danger rounded text-white";
-    };
+    }; */
     var showCurrentIconDiv = document.createElement("div");
     showCurrentIconDiv.className = "col-4";
     currentResultsDiv.appendChild(showCurrentIconDiv);
@@ -213,7 +179,7 @@ var displayCurrent = function () {
     showCurrentIcon.src = "./assets/images/icons/" + currentIcon + ".png";
     showCurrentIconDiv.appendChild(showCurrentIcon);
     // add div row for future forecast
-    var futureRowDiv = document.createElement("div");
+    futureRowDiv = document.createElement("div");
     futureRowDiv.className = "row"
     resultsEl.appendChild(futureRowDiv);
     // create future forecast day one
@@ -307,10 +273,10 @@ var displayCurrent = function () {
 var saveCity = function () {
     // push city to array
     listHistory.push(city);
-    // allow 10 history listings
-    listHistory.splice(10);
+    // delete duplicate from array
+    var newHistory = [...new Set(listHistory)];
     // save city to local storage
-    localStorage.setItem("history", JSON.stringify(listHistory));
+    localStorage.setItem("history", JSON.stringify(newHistory));
     updateHistory();
 };
 
@@ -333,14 +299,34 @@ var displayHistory = function () {
         historyListEl.appendChild(li);
         // create button element
         var button = document.createElement("button");
+        button.setAttribute("id", "history-btn");
         button.className = "btn btn-primary m-2";
         button.innerHTML = listHistory[i];
         li.appendChild(button);
+        $(button).click(function () {
+            console.log($(this)[0].innerText);
+            city = $(this)[0].innerText;
+            console.log(city);
+            currentContainer.remove();
+            futureRowDiv.remove();
+            getCityLocation();
+        });
     };
 };
 
 // run display history function
 displayHistory();
 
+
 // EVENT LISTENERS
+// check if there are any history buttons and fun event listener
+/* var historyButtonEl = document.getElementById("history-btn");
+if (historyButtonEl) {
+    historyButtonEl.addEventListener("click", btnHandler);
+}; */
+
+// add event listener
+
+
+// submit listener
 formEl.addEventListener("submit", formSubmitHandler);
