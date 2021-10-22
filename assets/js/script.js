@@ -164,14 +164,14 @@ var displayCurrent = function () {
     showCurrentResults.className = "fs-4";
     showCurrentResults.innerHTML = "<b>Current Temperature:</b> " + currentTemp + " °F <br/> <b>Current Humidity:</b> " + currentHumidity + " % <br /> <b>Current Wind Speed:</b> " + currentWind + " MPH <br /> <b>UV Index:</b> " + "<span id='uvi'>" + currentUvi + "</span>";
     showCurrentResultsDiv.appendChild(showCurrentResults);
-    /* var showCurrentUvi = document.getElementById("uvi");
+    var showCurrentUvi = document.getElementById("uvi");
     if (currentUvi <= 2) {
         showCurrentUvi.className = "bg-success rounded text-white";
-    } else if (6 > currentUvi > 2) {
+    } else if (currentUvi > 3) {
         showCurrentUvi.className = "bg-warning rounded text-white";
     } else if (currentUvi > 6) {
         showCurrentUvi.className = "bg-danger rounded text-white";
-    }; */
+    };
     var showCurrentIconDiv = document.createElement("div");
     showCurrentIconDiv.className = "col-4";
     currentResultsDiv.appendChild(showCurrentIconDiv);
@@ -307,8 +307,14 @@ var displayHistory = function () {
             console.log($(this)[0].innerText);
             city = $(this)[0].innerText;
             console.log(city);
-            currentContainer.remove();
-            futureRowDiv.remove();
+            if (currentContainer) {
+                currentContainer.remove();
+            };
+            // currentContainer.remove();
+            if (futureRowDiv) {
+                futureRowDiv.remove();
+            };
+            // futureRowDiv.remove();
             getCityLocation();
         });
     };
@@ -316,17 +322,6 @@ var displayHistory = function () {
 
 // run display history function
 displayHistory();
-
-
-// EVENT LISTENERS
-// check if there are any history buttons and fun event listener
-/* var historyButtonEl = document.getElementById("history-btn");
-if (historyButtonEl) {
-    historyButtonEl.addEventListener("click", btnHandler);
-}; */
-
-// add event listener
-
 
 // submit listener
 formEl.addEventListener("submit", formSubmitHandler);
