@@ -1,4 +1,4 @@
-# Weather Dashboard
+# Weather Dashboard 🌤️
 ## Description
 - Building a weather dashboard has been a great way for me to test out my coding skills that we have learned so far and to implement server side API's in a fun way.
 - To begin building the dashboard I started with fetching the location API provided by Open Weather. When a user enters in the city it was then able to get the latitude and longitude from the city name they entered. Using the latitude and longitude, I was then able to use then to fetch the weather API also provided by Open Weather. With this new data, I was ready to start building the new DOM elements to display to show the current weather as well as the five day future forecast.
